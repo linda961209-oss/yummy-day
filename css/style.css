@@ -1,0 +1,2152 @@
+/**
+ * Yummy Day — 今天吃什麼？
+ * 視覺設計：韓系奶油風 × 草莓甜點店精緻美學 (Korean Cream Bakery & Cafe Boutique)
+ * 專為大學「程式設計與應用」期末專案打造的高質感品牌化生活網站
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@600;700;800;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap');
+
+:root {
+  /* ─── 韓系奶油甜點店配色系統 (Cafe Palette) ─── */
+  --bg-cream: #FAF6EE;
+  --bg-cream-pure: #FFFDF9;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F5EDE2;
+
+  /* 草莓生乳霜粉 (Strawberry Cream) */
+  --strawberry-primary: #FF5E82;
+  --strawberry-hover: #FF4771;
+  --strawberry-soft: #FFAAB8;
+  --strawberry-light: #FFF0F4;
+  --strawberry-border: #FFD3DC;
+
+  /* 焦糖拿鐵與肉桂榛果 (Caramel & Hazelnut) */
+  --latte-caramel: #B87B4E;
+  --latte-warm: #DFCEBA;
+  --latte-soft: #F9F2EA;
+  --latte-border: #E8D9CC;
+
+  /* 蜂蜜金黃奶油 (Butter Cream) */
+  --butter-gold: #F2C779;
+  --butter-yellow: #FFE58F;
+  --butter-light: #FFF9E6;
+  --butter-border: #FCE19B;
+
+  /* 烘焙深焙咖啡文字色 (Espresso & Cocoa) */
+  --text-main: #382A2C;
+  --text-secondary: #6B5558;
+  --text-muted: #9E888B;
+  --border-soft: #EFE4DA;
+
+  /* 精緻立體陰影 (Soft Velvet Glow) */
+  --shadow-sm: 0 4px 14px rgba(210, 130, 150, 0.08);
+  --shadow-md: 0 10px 28px rgba(210, 120, 140, 0.12);
+  --shadow-lg: 0 18px 45px rgba(200, 110, 130, 0.16);
+  --shadow-gold: 0 8px 24px rgba(242, 199, 121, 0.28);
+  --shadow-glow: 0 0 25px rgba(255, 94, 130, 0.25);
+
+  /* 圓角規格 */
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+
+  /* 字體組合 */
+  --font-base: 'Zen Maru Gothic', 'Nunito', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Nunito', 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+}
+
+/* ─── 基礎重設 ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--bg-cream);
+  color: var(--text-main);
+  line-height: 1.68;
+  background-image: 
+    radial-gradient(circle at 12% 18%, rgba(255, 225, 232, 0.75) 0%, transparent 40%),
+    radial-gradient(circle at 88% 82%, rgba(255, 241, 215, 0.8) 0%, transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 背景細微手工紙質感紋路 (Subtle Paper Grid) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(180, 140, 150, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── 頂部導覽列 (Korean Cafe Header) ─── */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 253, 249, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 2px solid rgba(255, 211, 220, 0.65);
+  box-shadow: 0 6px 24px rgba(220, 140, 155, 0.08);
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-icon-bubble {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, #FF6584, #FFAAA6);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 6px 16px rgba(255, 101, 132, 0.35);
+  border: 2px solid #FFFFFF;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  font-family: var(--font-display);
+  background: linear-gradient(135deg, #FF4771, #B87B4E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.15;
+}
+
+.brand-slogan {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+/* 導覽連結清單 */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border-radius: var(--radius-xl);
+  transition: all 0.28s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--strawberry-primary);
+  background: var(--strawberry-light);
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--strawberry-primary), #FF7597);
+  box-shadow: 0 4px 16px rgba(255, 94, 130, 0.35);
+}
+
+.fav-badge-count {
+  background: #FFFFFF;
+  color: var(--strawberry-primary);
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 12px;
+  margin-left: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-btn {
+  display: none;
+  font-size: 1.8rem;
+  color: var(--strawberry-primary);
+  padding: 6px 10px;
+}
+
+/* ─── 按鈕系統 (Buttons) ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: var(--radius-xl);
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #FF5E82 0%, #FF85A1 100%);
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 22px rgba(255, 94, 130, 0.38);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #FF4771 0%, #FF7092 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(255, 94, 130, 0.48);
+}
+
+.btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-secondary {
+  background: var(--butter-light);
+  color: #7D5608;
+  border: 1.5px solid var(--butter-border);
+}
+
+.btn-secondary:hover {
+  background: var(--butter-yellow);
+  color: #5A3D02;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-outline {
+  background: #FFFFFF;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-soft);
+}
+
+.btn-outline:hover {
+  border-color: var(--strawberry-soft);
+  color: var(--strawberry-primary);
+  background: var(--strawberry-light);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 8px 18px;
+  font-size: 0.88rem;
+  border-radius: var(--radius-lg);
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── 頁面切換控制 (SPA Sections) ─── */
+.page-section {
+  display: none;
+  animation: pageFadeIn 0.42s ease forwards;
+  padding: 36px 0 80px;
+}
+
+.page-section.active-section {
+  display: block;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── 首頁 (Home Section) ─── */
+.hero-wrapper {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  align-items: center;
+  gap: 48px;
+  padding: 30px 0 45px;
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-sparkle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  padding: 7px 18px;
+  border-radius: var(--radius-xl);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--strawberry-primary);
+  border: 1.5px solid var(--strawberry-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 22px;
+}
+
+.hero-sparkle-pill .heart-beat {
+  display: inline-block;
+  animation: pulseHeart 1.4s infinite;
+}
+
+@keyframes pulseHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  line-height: 1.25;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+  font-family: var(--font-display);
+}
+
+.hero-title .highlight-strawberry {
+  background: linear-gradient(120deg, #FF4771, #FF7597);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.hero-title .highlight-strawberry::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 170, 184, 0.4);
+  border-radius: 6px;
+  z-index: -1;
+}
+
+.hero-subtitle {
+  font-size: 1.18rem;
+  color: var(--text-secondary);
+  margin-bottom: 34px;
+  line-height: 1.68;
+}
+
+.hero-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ─── 首頁右側：韓系甜點店餐桌拼貼 (Cafe Collage) ─── */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cafe-collage-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 400px;
+}
+
+/* 拍立得照片卡片 (Polaroid Card) */
+.polaroid-card {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 320px;
+  background: #FFFFFF;
+  padding: 14px 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(180, 110, 130, 0.18);
+  border: 1px solid #F3EAE0;
+  transform: rotate(-3deg);
+  transition: transform 0.4s ease;
+  z-index: 2;
+}
+
+.polaroid-card:hover {
+  transform: rotate(0deg) translateY(-6px);
+  z-index: 4;
+}
+
+/* 和紙膠帶 (Washi Tape) */
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 24px;
+  background: rgba(255, 230, 195, 0.85);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(200, 160, 130, 0.35);
+  border-right: 2px dashed rgba(200, 160, 130, 0.35);
+  z-index: 3;
+}
+
+.polaroid-img-wrap {
+  width: 100%;
+  height: 240px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.polaroid-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.polaroid-card:hover .polaroid-img-wrap img {
+  transform: scale(1.05);
+}
+
+.polaroid-caption {
+  margin-top: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.caption-script {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--strawberry-primary);
+}
+
+.caption-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* 韓系咖啡館小白單 (Cafe Order Receipt) */
+.cafe-receipt-slip {
+  position: absolute;
+  bottom: 10px;
+  right: 0px;
+  width: 220px;
+  background: #FFFDF9;
+  padding: 18px 16px;
+  border-radius: 8px;
+  box-shadow: 0 14px 32px rgba(160, 120, 110, 0.16);
+  border: 1.5px dashed var(--latte-border);
+  transform: rotate(5deg);
+  transition: transform 0.4s ease;
+  z-index: 3;
+  font-family: var(--font-display);
+}
+
+.cafe-receipt-slip:hover {
+  transform: rotate(2deg) translateY(-8px);
+  z-index: 4;
+}
+
+.receipt-header {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.receipt-shop {
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: var(--latte-caramel);
+  display: block;
+}
+
+.receipt-no {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.receipt-dashed {
+  border-top: 1px dashed var(--latte-border);
+  margin: 8px 0;
+}
+
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.receipt-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.receipt-mood-val {
+  font-size: 0.85rem;
+  color: var(--strawberry-primary);
+  font-weight: 900;
+  margin-top: 2px;
+}
+
+/* 懸浮裝飾貼紙 */
+.floating-sticker {
+  position: absolute;
+  background: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  font-size: 0.88rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid var(--border-soft);
+  z-index: 4;
+  animation: floatSticker 4s ease-in-out infinite;
+}
+
+.sticker-top-right {
+  top: -8px;
+  right: 15px;
+  color: #B45309;
+  background: var(--butter-light);
+  border-color: var(--butter-border);
+  animation-delay: 0.4s;
+}
+
+.sticker-bottom-left {
+  bottom: 25px;
+  left: -15px;
+  color: var(--strawberry-primary);
+  background: var(--strawberry-light);
+  border-color: var(--strawberry-border);
+  animation-delay: 1.6s;
+}
+
+@keyframes floatSticker {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* ─── 跑馬燈滾動緞帶 (Marquee Strip) ─── */
+.cafe-marquee-strip {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #FFFFFF;
+  border: 1.5px solid var(--strawberry-border);
+  border-radius: var(--radius-xl);
+  padding: 12px 0;
+  box-shadow: var(--shadow-sm);
+  margin: 30px 0 50px;
+  position: relative;
+}
+
+.marquee-track {
+  display: inline-block;
+  animation: marqueeRoll 32s linear infinite;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+}
+
+.marquee-track span {
+  margin: 0 14px;
+}
+
+.marquee-track .dot {
+  color: var(--strawberry-primary);
+  margin: 0 6px;
+}
+
+@keyframes marqueeRoll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── 今日幸運美食專區 (Daily Lucky Food) ─── */
+.section-header-center {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.section-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--strawberry-light);
+  color: var(--strawberry-primary);
+  padding: 6px 16px;
+  border-radius: var(--radius-xl);
+  font-size: 0.84rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  border: 1.5px solid var(--strawberry-border);
+  letter-spacing: 0.5px;
+}
+
+.section-main-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+}
+
+.section-sub-title {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+}
+
+.daily-food-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--latte-border);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 60px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.daily-food-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--strawberry-border);
+}
+
+.daily-food-inner {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  position: relative;
+}
+
+.daily-badge-ribbon {
+  position: absolute;
+  top: 18px;
+  left: -6px;
+  background: linear-gradient(135deg, #FF5E82, #FFAAA6);
+  color: #FFFFFF;
+  padding: 6px 22px;
+  font-size: 0.88rem;
+  font-weight: 900;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  box-shadow: 0 4px 12px rgba(255, 94, 130, 0.4);
+  z-index: 4;
+}
+
+.daily-image-wrap {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.daily-food-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.daily-food-card:hover .daily-food-img {
+  transform: scale(1.06);
+}
+
+.daily-category-tag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  padding: 5px 14px;
+  border-radius: var(--radius-xl);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--latte-caramel);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.daily-content-wrap {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.daily-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.daily-date-pill {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--strawberry-primary);
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.daily-food-title {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: var(--text-main);
+  font-family: var(--font-display);
+}
+
+.daily-price-tag {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--strawberry-primary);
+  background: var(--strawberry-light);
+  padding: 6px 16px;
+  border-radius: var(--radius-lg);
+  white-space: nowrap;
+  border: 1px solid var(--strawberry-border);
+}
+
+.daily-food-desc {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.65;
+}
+
+.daily-reason-box {
+  background: var(--butter-light);
+  border: 1.5px dashed var(--butter-border);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: #7D5608;
+}
+
+.daily-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ─── 五大核心功能入口卡片 (Feature Cards) ─── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.feature-portal-card {
+  background: #FFFFFF;
+  padding: 30px 22px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-portal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--strawberry-soft), var(--butter-yellow));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-portal-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--strawberry-border);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-portal-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon-bubble {
+  width: 66px;
+  height: 66px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 18px;
+  transition: transform 0.35s ease;
+}
+
+.feature-portal-card:hover .feature-icon-bubble {
+  transform: scale(1.15) rotate(6deg);
+}
+
+.icon-wheel-bg { background: #FFE8EC; color: #FF5E82; }
+.icon-mood-bg  { background: #FFF0F5; color: #FF758C; }
+.icon-budget-bg{ background: #FFF9E6; color: #F5A623; }
+.icon-fav-bg   { background: #FFE8ED; color: #FF477E; }
+.icon-all-bg   { background: #E8F4FD; color: #3A86FF; }
+
+.feature-title {
+  font-size: 1.18rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.feature-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.feature-btn-text {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--strawberry-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.feature-portal-card:hover .feature-btn-text {
+  gap: 8px;
+}
+
+/* ─── 功能 1：美食命運轉盤專區 (Fortune Wheel) ─── */
+.wheel-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 44px;
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--latte-border);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.wheel-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.wheel-canvas-container {
+  position: relative;
+  width: 440px;
+  height: 440px;
+  max-width: 100%;
+}
+
+#fortune-wheel-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  filter: drop-shadow(0 14px 28px rgba(220, 130, 150, 0.22));
+}
+
+/* 轉盤金屬寶石指針 (正上方 12 點鐘位置) */
+.wheel-pointer {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 48px;
+  pointer-events: none;
+  transition: transform 0.12s ease;
+}
+
+.wheel-pointer.pointer-tick {
+  animation: pointerWobble 0.12s ease;
+}
+
+@keyframes pointerWobble {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  40% { transform: translateX(-50%) rotate(-12deg); }
+  100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+.wheel-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-label {
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 13px 20px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--text-main);
+  background: var(--bg-cream);
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B87B4E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
+.custom-select:focus {
+  border-color: var(--strawberry-primary);
+  box-shadow: 0 0 0 3.5px rgba(255, 94, 130, 0.2);
+}
+
+.candidates-preview-box {
+  background: var(--bg-cream);
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--latte-border);
+}
+
+.candidates-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.candidates-header span {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+}
+
+.btn-shuffle-link {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--strawberry-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-shuffle-link:hover {
+  text-decoration: underline;
+}
+
+.candidate-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 110px;
+  overflow-y: auto;
+}
+
+.candidate-tag {
+  background: #FFFFFF;
+  border: 1.5px solid var(--strawberry-border);
+  padding: 5px 12px;
+  border-radius: var(--radius-xl);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+}
+
+.spin-btn-lg {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+}
+
+/* ─── 功能 2：心情選食物專區 (Mood Food) ─── */
+.mood-picker-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.mood-btn {
+  background: #FFFFFF;
+  border: 2px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.mood-btn:hover {
+  transform: translateY(-6px);
+  border-color: var(--strawberry-soft);
+  box-shadow: var(--shadow-md);
+}
+
+.mood-btn.active {
+  background: linear-gradient(145deg, #FFF0F4, #FFFFFF);
+  border-color: var(--strawberry-primary);
+  box-shadow: 0 8px 24px rgba(255, 94, 130, 0.25);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.mood-emoji {
+  font-size: 2.3rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.mood-btn:hover .mood-emoji {
+  transform: scale(1.2);
+}
+
+.mood-name {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--text-main);
+}
+
+.mood-btn.active .mood-name {
+  color: var(--strawberry-primary);
+}
+
+.mood-tagline {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.mood-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  padding: 18px 26px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--strawberry-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.current-mood-pill {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mood-big-emoji {
+  font-size: 2.4rem;
+}
+
+.current-mood-pill h4 {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--text-main);
+}
+
+.current-mood-pill p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ─── 功能 3：美食探索與預算篩選專區 (Explore & Budget) ─── */
+.filter-card-wrapper {
+  background: #FFFFFF;
+  padding: 28px 32px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--latte-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.94rem;
+  font-weight: 900;
+  color: var(--text-secondary);
+  min-width: 82px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pills-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-xl);
+  font-size: 0.88rem;
+  font-weight: 800;
+  background: var(--bg-cream);
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-soft);
+  transition: all 0.22s ease;
+}
+
+.pill-btn:hover {
+  border-color: var(--strawberry-soft);
+  color: var(--strawberry-primary);
+  background: var(--strawberry-light);
+}
+
+.pill-btn.active {
+  background: linear-gradient(135deg, var(--strawberry-primary), #FF7597);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(255, 94, 130, 0.32);
+}
+
+.search-and-sort-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px dashed var(--latte-border);
+}
+
+.search-box-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 11px 18px 11px 44px;
+  font-size: 0.92rem;
+  font-family: inherit;
+  border-radius: var(--radius-xl);
+  background: var(--bg-cream);
+  border: 1.5px solid var(--border-soft);
+  outline: none;
+  transition: all 0.22s ease;
+}
+
+.search-input:focus {
+  border-color: var(--strawberry-primary);
+  box-shadow: 0 0 0 3px rgba(255, 94, 130, 0.2);
+  background: #FFFFFF;
+}
+
+.sort-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.sort-select-wrap select {
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-soft);
+  background: var(--bg-cream);
+  outline: none;
+}
+
+.explore-result-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+}
+
+/* ─── 美食卡片網格 (Food Cards Grid - 韓系甜點店菜單精裝版) ─── */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 26px;
+}
+
+.food-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-soft);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.food-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--strawberry-border);
+  box-shadow: 0 16px 36px rgba(220, 130, 150, 0.18);
+}
+
+.food-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.food-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.food-card:hover .food-card-img-wrap img {
+  transform: scale(1.08);
+}
+
+.card-img-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.38) 100%);
+  pointer-events: none;
+}
+
+/* 玻璃擬態愛心收藏按鈕 (Glassmorphism Heart Button) */
+.card-heart-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--text-muted);
+  transition: all 0.25s ease;
+  z-index: 2;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+}
+
+.card-heart-btn:hover {
+  transform: scale(1.15);
+  background: #FFFFFF;
+  color: var(--strawberry-primary);
+}
+
+.card-heart-btn.favorited {
+  color: #FF477E;
+  background: #FFF0F4;
+  border-color: var(--strawberry-border);
+}
+
+.card-heart-btn .icon-heart {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-heart-btn:active .icon-heart {
+  transform: scale(1.3);
+}
+
+/* 卡片雙標籤 (菜系 + 餐點型態) */
+.card-badge-row {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.card-cuisine-pill {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-main);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.card-meal-pill {
+  background: rgba(184, 123, 78, 0.92);
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.food-card-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.food-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.food-card-title {
+  font-size: 1.18rem;
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1.35;
+  font-family: var(--font-display);
+}
+
+/* 甜點店價格鋼印 (Price Seal) */
+.food-card-price-seal {
+  background: var(--strawberry-light);
+  border: 1px solid var(--strawberry-border);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.food-card-price-seal .price-symbol {
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: var(--strawberry-primary);
+}
+
+.food-card-price-seal .price-value {
+  font-size: 1.12rem;
+  font-weight: 900;
+  color: var(--strawberry-primary);
+}
+
+.food-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.58;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.card-mood-reason {
+  background: var(--strawberry-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #8C384A;
+  margin-bottom: 12px;
+  line-height: 1.45;
+  display: flex;
+  gap: 6px;
+  border-left: 3px solid var(--strawberry-primary);
+}
+
+.card-footer-row {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.food-card-moods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card-view-hint {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--strawberry-primary);
+  opacity: 0.8;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.food-card:hover .card-view-hint {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.mood-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-xl);
+  background: var(--bg-cream);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-soft);
+}
+
+.badge-happy    { background: #FFF9E6; color: #8A6805; border-color: #FFE58F; }
+.badge-sad      { background: #E8F4FD; color: #0C63E4; border-color: #B6D4FE; }
+.badge-tired    { background: #F3E8FF; color: #6F42C1; border-color: #D8B4FE; }
+.badge-stressed { background: #FFE8EC; color: #DC3545; border-color: #F8D7DA; }
+.badge-bored    { background: #E6FFFA; color: #0D9488; border-color: #99F6E4; }
+.badge-blessed  { background: #FFF0F5; color: #D63384; border-color: #F7D6E6; }
+
+/* ─── 功能 4：我的美食收藏專區 (Favorites) ─── */
+.favorites-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  padding: 18px 28px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--latte-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.fav-count-indicator {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--strawberry-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fav-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 空狀態設計 (Empty State) */
+.empty-state-box {
+  grid-column: 1 / -1;
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--strawberry-border);
+  padding: 65px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-icon {
+  font-size: 4.2rem;
+  line-height: 1;
+  animation: floatSticker 3s ease-in-out infinite;
+}
+
+.empty-state-box h3 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--text-main);
+  font-family: var(--font-display);
+}
+
+.empty-state-box p {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  max-width: 420px;
+  margin-bottom: 14px;
+}
+
+/* ─── 彈出視窗系統 (Modal System) ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 22, 26, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-window {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 530px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+  border: 2px solid var(--strawberry-border);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  padding: 34px 30px;
+}
+
+.modal-overlay.open .modal-window {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-cream);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: var(--strawberry-light);
+  color: var(--strawberry-primary);
+  transform: rotate(90deg);
+}
+
+/* 轉盤結果彈窗專用樣式 */
+.result-celebrate-badge {
+  display: inline-block;
+  background: var(--butter-light);
+  color: #B45309;
+  font-size: 0.88rem;
+  font-weight: 900;
+  padding: 4px 16px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--butter-border);
+  margin-bottom: 8px;
+}
+
+.result-title {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
+.result-food-name {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--strawberry-primary);
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+}
+
+.result-image-box {
+  width: 100%;
+  height: 250px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.result-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.result-category-pill {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  padding: 5px 14px;
+  border-radius: var(--radius-xl);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.result-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.result-price {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+.result-price strong {
+  font-size: 1.4rem;
+  color: var(--strawberry-primary);
+}
+
+.result-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.result-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* 詳細彈窗專用樣式 */
+.detail-modal-header {
+  margin-bottom: 14px;
+}
+
+.detail-category-badge {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--latte-caramel);
+  background: var(--latte-soft);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-bottom: 6px;
+  border: 1px solid var(--latte-border);
+}
+
+.detail-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-main);
+  font-family: var(--font-display);
+}
+
+.detail-image-box {
+  width: 100%;
+  height: 260px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.detail-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.detail-price-label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.detail-price-val {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--strawberry-primary);
+}
+
+.detail-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.68;
+  margin-bottom: 18px;
+}
+
+.detail-mood-reason {
+  background: var(--strawberry-light);
+  border-left: 4px solid var(--strawberry-primary);
+  padding: 12px 18px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: 0.92rem;
+  color: #793440;
+  margin-bottom: 18px;
+  display: flex;
+  gap: 8px;
+}
+
+.detail-mood-tags {
+  margin-bottom: 24px;
+}
+
+.detail-mood-tags label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.detail-mood-tags .tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ─── 提示訊息氣泡 (Toast Notifications) ─── */
+#toast-container {
+  position: fixed;
+  top: 88px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.yummy-toast {
+  background: #FFFFFF;
+  border: 1.5px solid var(--strawberry-border);
+  box-shadow: 0 12px 32px rgba(255, 94, 130, 0.28);
+  padding: 13px 22px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: var(--text-main);
+  opacity: 0;
+  transform: translateX(40px) scale(0.9);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+}
+
+.yummy-toast.show {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.toast-icon {
+  font-size: 1.3rem;
+}
+
+/* ─── 撒花粒子效果容器 (Confetti) ─── */
+#confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1500;
+  overflow: hidden;
+}
+
+.confetti-particle {
+  position: absolute;
+  top: -20px;
+  opacity: 0.92;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ─── 回到頂端浮動按鈕 ─── */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--strawberry-border);
+  color: var(--strawberry-primary);
+  box-shadow: 0 8px 24px rgba(255, 94, 130, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 90;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: var(--strawberry-primary);
+  color: #FFFFFF;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(255, 94, 130, 0.45);
+}
+
+/* ─── 頁尾 (Footer) ─── */
+.main-footer {
+  background: #FFFFFF;
+  border-top: 1.5px solid var(--border-soft);
+  padding: 55px 0 32px;
+  margin-top: 80px;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.footer-brand {
+  max-width: 380px;
+}
+
+.footer-brand h4 {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--strawberry-primary);
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.footer-info-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: right;
+}
+
+.course-badge {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--latte-caramel);
+  background: var(--latte-soft);
+  padding: 5px 14px;
+  border-radius: var(--radius-xl);
+  display: inline-block;
+  border: 1px solid var(--latte-border);
+}
+
+.footer-copyright {
+  border-top: 1px solid var(--bg-subtle);
+  padding-top: 24px;
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+/* ─── 響應式佈局 (Responsive Breakpoints) ─── */
+@media (max-width: 992px) {
+  .hero-wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .hero-actions-row {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .daily-food-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-image-wrap {
+    min-height: 250px;
+  }
+
+  .daily-content-wrap {
+    padding: 28px;
+  }
+
+  .wheel-layout {
+    grid-template-columns: 1fr;
+    padding: 32px 20px;
+  }
+
+  .mood-picker-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 74px;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 253, 249, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 24px;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border-bottom: 2px solid var(--strawberry-border);
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.35s ease;
+  }
+
+  .nav-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 2.3rem;
+  }
+
+  .cafe-collage-wrapper {
+    max-width: 330px;
+    height: 360px;
+  }
+
+  .polaroid-card {
+    width: 270px;
+  }
+
+  .polaroid-img-wrap {
+    height: 190px;
+  }
+
+  .cafe-receipt-slip {
+    width: 190px;
+    bottom: 5px;
+    right: -5px;
+  }
+
+  .wheel-canvas-container {
+    width: 320px;
+    height: 320px;
+  }
+
+  .mood-picker-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-info-tags {
+    text-align: center;
+  }
+}
