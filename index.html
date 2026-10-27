@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yummy Day — 今天吃什麼？♡ 一中街 × 逢甲夜市美食決定器</title>
+  <meta name="description" content="韓系奶油風一中街商圈與逢甲夜市美食決定網站，擁有命運轉盤、心情選食物、預算與餐點篩選、美食口袋收藏等豐富互動功能！收錄圈粉舖子、私肉羹、50藍、炭烤串燒、酥立蛋餅、The bab韓式、麥味登等48大在地人氣名店！" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍓</text></svg>" />
+
+  <!-- 樣式表 -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 撒花特效容器 -->
+  <div id="confetti-container"></div>
+
+  <!-- 提示氣泡容器 (Toast) -->
+  <div id="toast-container"></div>
+
+  <!-- 頂部主導覽列 -->
+  <header class="main-header">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" data-nav-target="home-section">
+        <div class="logo-icon-bubble">🍓</div>
+        <div class="logo-text-group">
+          <span class="brand-name">Yummy Day</span>
+          <span class="brand-slogan">今天吃什麼？♡</span>
+        </div>
+      </a>
+
+      <!-- 電腦版導覽選單 -->
+      <nav>
+        <ul class="nav-menu" id="main-nav-menu">
+          <li>
+            <a href="#home" class="nav-link active" data-target="home-section">
+              <span>🏠 首頁</span>
+            </a>
+          </li>
+          <li>
+            <a href="#wheel" class="nav-link" data-target="wheel-section">
+              <span>🎡 美食轉盤</span>
+            </a>
+          </li>
+          <li>
+            <a href="#mood" class="nav-link" data-target="mood-section">
+              <span>💗 心情選食物</span>
+            </a>
+          </li>
+          <li>
+            <a href="#explore" class="nav-link" data-target="explore-section">
+              <span>💰 美食探索</span>
+            </a>
+          </li>
+          <li>
+            <a href="#favorites" class="nav-link" data-target="favorites-section">
+              <span>❤️ 我的收藏</span>
+              <span class="fav-badge-count" style="display: none;">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- 手機漢堡選單按鈕 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="切換選單">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- 主內容區域 (SPA 區段切換) -->
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         首頁 (Home Section)
+    ══════════════════════════════════════════ -->
+    <section id="home-section" class="page-section active-section">
+      <div class="container">
+        
+        <!-- Hero 主視覺區域 -->
+        <div class="hero-wrapper">
+          <div class="hero-content">
+            <div class="hero-sparkle-pill">
+              <span class="heart-beat">💖</span> 一中街夜市 × 逢甲商圈 美食指南
+            </div>
+            <h1 class="hero-title">
+              今天吃什麼？<br />
+              讓 <span class="highlight-strawberry">Yummy Day</span> 幫你決定！
+            </h1>
+            <p class="hero-subtitle">
+              每天最困難的選擇，就交給一中與逢甲美食魔法吧 ♡<br />
+              旋轉命運轉盤、依據今天的心情與預算，探索圈粉舖子、私肉羹、50藍、炭烤串燒等 48 種人氣名店料理！
+            </p>
+            <div class="hero-actions-row">
+              <button class="btn btn-primary" data-nav-target="wheel-section">
+                🎡 開始選美食
+              </button>
+              <button class="btn btn-secondary" data-nav-target="mood-section">
+                💗 看看心情推薦
+              </button>
+              <button class="btn btn-outline" data-nav-target="explore-section">
+                💰 預算探索
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero 右側韓系甜點店餐桌拼貼展示 (Cafe Collage) -->
+          <div class="hero-visual">
+            <div class="cafe-collage-wrapper">
+              
+              <!-- 拍立得照片卡片 (和紙膠帶風格) -->
+              <div class="polaroid-card">
+                <div class="washi-tape"></div>
+                <div class="polaroid-img-wrap">
+                  <img 
+                    src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80" 
+                    alt="圈粉舖子 招牌酸辣粉" 
+                    onerror="window.handleImageError(this, '圈粉舖子酸辣粉')"
+                  />
+                </div>
+                <div class="polaroid-caption">
+                  <span class="caption-script">~ Yizhong &amp; Fengjia ~</span>
+                  <span class="caption-sub">圈粉舖子 · 麻辣酸爽 100%</span>
+                </div>
+              </div>
+
+              <!-- 韓系咖啡館小白單 (Cafe Order Receipt) -->
+              <div class="cafe-receipt-slip">
+                <div class="receipt-header">
+                  <span class="receipt-shop">✦ 一中街 × 逢甲夜市 ✦</span>
+                  <span class="receipt-no">ORDER #048</span>
+                </div>
+                <div class="receipt-dashed"></div>
+                <div class="receipt-item">
+                  <span>🍜 圈粉舖子酸辣粉</span>
+                  <span>$130</span>
+                </div>
+                <div class="receipt-item">
+                  <span>🍲 私肉羹香菇肉羹</span>
+                  <span>$75</span>
+                </div>
+                <div class="receipt-item">
+                  <span>🧋 50藍 1號珍波椰</span>
+                  <span>$55</span>
+                </div>
+                <div class="receipt-dashed"></div>
+                <div class="receipt-total">
+                  <span>TODAY'S MOOD:</span>
+                  <strong class="receipt-mood-val">100% 台中夜市好滋味 ♡</strong>
+                </div>
+              </div>
+
+              <!-- 懸浮裝飾貼紙 -->
+              <div class="floating-sticker sticker-top-right">
+                <span>🎀 台中夜市熱門</span>
+              </div>
+              <div class="floating-sticker sticker-bottom-left">
+                <span>✨ 48 家在地名店</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 韓系甜點店無縫滾動緞帶跑馬燈 (Marquee Ticker) -->
+        <div class="cafe-marquee-strip">
+          <div class="marquee-track">
+            <span>🍜 圈粉舖子酸辣粉</span>
+            <span class="dot">✦</span>
+            <span>🍲 私肉羹香菇肉羹</span>
+            <span class="dot">✦</span>
+            <span>🧋 50藍四季春珍波椰</span>
+            <span class="dot">✦</span>
+            <span>🍢 逢甲激旨燒鳥串燒</span>
+            <span class="dot">✦</span>
+            <span>🥞 酥立蛋餅雙起司肉鬆</span>
+            <span class="dot">✦</span>
+            <span>🥘 The bab韓式烤五花定食</span>
+            <span class="dot">✦</span>
+            <span>🍔 麥味登咔啦雞腿套餐</span>
+            <span class="dot">✦</span>
+            <span>🍠 逢甲溫家地瓜球</span>
+            <span class="dot">✦</span>
+            <span>🥟 逢甲明倫蛋餅</span>
+            <span class="dot">✦</span>
+            <span>🍜 圈粉舖子酸辣粉</span>
+            <span class="dot">✦</span>
+            <span>🍲 私肉羹香菇肉羹</span>
+            <span class="dot">✦</span>
+            <span>🧋 50藍四季春珍波椰</span>
+            <span class="dot">✦</span>
+            <span>🍢 逢甲激旨燒鳥串燒</span>
+            <span class="dot">✦</span>
+            <span>🥞 酥立蛋餅雙起司肉鬆</span>
+            <span class="dot">✦</span>
+            <span>🥘 The bab韓式烤五花定食</span>
+            <span class="dot">✦</span>
+            <span>🍔 麥味登咔啦雞腿套餐</span>
+            <span class="dot">✦</span>
+            <span>🍠 逢甲溫家地瓜球</span>
+            <span class="dot">✦</span>
+            <span>🥟 逢甲明倫蛋餅</span>
+            <span class="dot">✦</span>
+          </div>
+        </div>
+
+        <!-- 功能 5：今日美食推薦 (今日幸運美食專區) -->
+        <div class="section-header-center">
+          <div class="section-tag-pill">🍰 DAILY LUCKY FOOD</div>
+          <h2 class="section-main-title">今日幸運美食推薦</h2>
+          <p class="section-sub-title">每天為你精心挑選一款命定料理，整天都有好心情 ♡</p>
+        </div>
+
+        <div class="daily-food-card" id="daily-lucky-card">
+          <!-- 由 js/app.js 動態以今日日期雜湊生成 -->
+        </div>
+
+        <!-- 五大核心功能入口卡片 -->
+        <div class="section-header-center" style="margin-top: 50px;">
+          <div class="section-tag-pill">✨ FIVE CORE FEATURES</div>
+          <h2 class="section-main-title">五大美食探索魔法</h2>
+          <p class="section-sub-title">不再為了吃什麼而糾結，點擊卡片立即體驗！</p>
+        </div>
+
+        <div class="features-grid">
+          <!-- 功能 1 入口 -->
+          <div class="feature-portal-card" data-nav-target="wheel-section">
+            <div class="feature-icon-bubble icon-wheel-bg">🎡</div>
+            <h3 class="feature-title">美食命運轉盤</h3>
+            <p class="feature-desc">物理減速旋轉動畫，自訂類別與預算，讓轉盤替你做出最完美的美味選擇！</p>
+            <span class="feature-btn-text">立即轉動 →</span>
+          </div>
+
+          <!-- 功能 2 入口 -->
+          <div class="feature-portal-card" data-nav-target="mood-section">
+            <div class="feature-icon-bubble icon-mood-bg">💗</div>
+            <h3 class="feature-title">心情選食物</h3>
+            <p class="feature-desc">開心、疲倦或壓力大？6 種心情量身打造療癒料理與專屬推薦小語！</p>
+            <span class="feature-btn-text">挑選心情 →</span>
+          </div>
+
+          <!-- 功能 3 入口 -->
+          <div class="feature-portal-card" data-nav-target="explore-section">
+            <div class="feature-icon-bubble icon-budget-bg">💰</div>
+            <h3 class="feature-title">預算與餐點篩選</h3>
+            <p class="feature-desc">100 元銅板美食到 300 元以上豐盛大餐，結合飯麵炸物即時雙重篩選！</p>
+            <span class="feature-btn-text">精準篩選 →</span>
+          </div>
+
+          <!-- 功能 4 入口 -->
+          <div class="feature-portal-card" data-nav-target="favorites-section">
+            <div class="feature-icon-bubble icon-fav-bg">❤️</div>
+            <h3 class="feature-title">我的美食收藏</h3>
+            <p class="feature-desc">一鍵收藏心動美食，瀏覽器 LocalStorage 永久保存，建立你的私人美食口袋名單。</p>
+            <span class="feature-btn-text">查看清單 →</span>
+          </div>
+
+          <!-- 全部探索 入口 -->
+          <div class="feature-portal-card" data-nav-target="explore-section">
+            <div class="feature-icon-bubble icon-all-bg">🍰</div>
+            <h3 class="feature-title">全方位美食探索</h3>
+            <p class="feature-desc">包含台式、日式、韓式、義美料理、甜點與特調飲品共 48 種豐富品項！</p>
+            <span class="feature-btn-text">漫遊美食 →</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         功能 1：美食命運轉盤專區 (Fortune Wheel)
+    ══════════════════════════════════════════ -->
+    <section id="wheel-section" class="page-section">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <div class="section-tag-pill">🎡 FEATURE 01 · 命運轉盤</div>
+          <h2 class="section-main-title">美食命運轉盤</h2>
+          <p class="section-sub-title">選擇你偏好的料理類別或預算，點擊「開始轉動」，讓美食魔法指引你！</p>
+        </div>
+
+        <div class="wheel-layout">
+          <!-- 轉盤 Canvas 舞台 -->
+          <div class="wheel-stage">
+            <div class="wheel-canvas-container">
+              <!-- 轉盤指針 (法式復古金邊心形寶石指針) -->
+              <div class="wheel-pointer">
+                <svg viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="pointerGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFE8A3" />
+                      <stop offset="50%" stop-color="#F2C779" />
+                      <stop offset="100%" stop-color="#D49B42" />
+                    </linearGradient>
+                  </defs>
+                  <!-- 外層法式金邊鏢頭 -->
+                  <path d="M20 46L5 14C3.5 10 6.5 4 11.5 4H28.5C33.5 4 36.5 10 35 14L20 46Z" fill="url(#pointerGoldGrad)" stroke="#FFFFFF" stroke-width="2" />
+                  <!-- 內嵌草莓甜心石 -->
+                  <path d="M20 38L9 14C8 11.5 10 7 13.5 7H26.5C30 7 32 11.5 31 14L20 38Z" fill="#FF4771" />
+                  <!-- 閃亮白金小珍珠寶石 -->
+                  <circle cx="20" cy="15" r="5" fill="#FFFFFF" />
+                  <circle cx="20" cy="15" r="3" fill="#FFE58F" />
+                </svg>
+              </div>
+
+              <!-- Canvas 畫布 -->
+              <canvas id="fortune-wheel-canvas" width="420" height="420"></canvas>
+            </div>
+          </div>
+
+          <!-- 轉盤控制面板 -->
+          <div class="wheel-controls-panel">
+            
+            <!-- 料理分類前置篩選 -->
+            <div class="control-group">
+              <label class="control-label" for="wheel-category-select">
+                <span>🍽️ 偏好商圈風格：</span>
+              </label>
+              <select id="wheel-category-select" class="custom-select">
+                <option value="all">全部商圈料理 (隨機混合)</option>
+                <option value="一中商圈美食">一中商圈美食 (圈粉舖子、私肉羹、酥立蛋餅、胖子雞排...)</option>
+                <option value="逢甲夜市美食">逢甲夜市美食 (激旨燒鳥串燒、地瓜球、明倫蛋餅、大腸包小腸...)</option>
+                <option value="異國人氣名店">異國人氣名店 (The bab韓式、朴大哥韓式炸雞、赤鬼牛排...)</option>
+                <option value="甜蜜甜品冰品">甜蜜甜品冰品 (一中豐仁冰、短腿阿鹿曲奇、冰火湯圓...)</option>
+                <option value="排隊特調手搖">排隊特調手搖 (50藍、艾得咖啡、甲文青、大甲芋頭城...)</option>
+              </select>
+            </div>
+
+            <!-- 預算區間前置篩選 -->
+            <div class="control-group">
+              <label class="control-label" for="wheel-budget-select">
+                <span>💰 預算範圍考量：</span>
+              </label>
+              <select id="wheel-budget-select" class="custom-select">
+                <option value="all">不限預算 (隨心所欲)</option>
+                <option value="tier1">100 元以下 (平價銅板美味)</option>
+                <option value="tier2">101～200 元 (日常小資好選擇)</option>
+                <option value="tier3">201～300 元 (精緻享受澎湃餐)</option>
+                <option value="tier4">301 元以上 (尊爵奢華大餐)</option>
+              </select>
+            </div>
+
+            <!-- 當前轉盤候選清單預覽 -->
+            <div class="candidates-preview-box">
+              <div class="candidates-header">
+                <span>轉盤候選美食清單（自動精選 8 款）：</span>
+                <button class="btn-shuffle-link" id="shuffle-wheel-btn">
+                  <span>🔄 換一組候選</span>
+                </button>
+              </div>
+              <div class="candidate-tags-wrap" id="wheel-candidate-tags">
+                <!-- 由 js/app.js 動態生成標籤 -->
+              </div>
+            </div>
+
+            <!-- 轉動按鈕 -->
+            <button class="btn btn-primary spin-btn-lg" id="spin-wheel-btn">
+              🎡 開始轉動命運！
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         功能 2：心情選食物專區 (Mood Food)
+    ══════════════════════════════════════════ -->
+    <section id="mood-section" class="page-section">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <div class="section-tag-pill">💗 FEATURE 02 · 心情選食物</div>
+          <h2 class="section-main-title">今天的心情是什麼顏色？</h2>
+          <p class="section-sub-title">選擇當下的心情感受，讓專屬的療癒美食給你的身心靈溫柔陪伴 ♡</p>
+        </div>
+
+        <!-- 6 種可愛心情選擇按鈕 -->
+        <div class="mood-picker-container">
+          <button class="mood-btn active" data-mood="happy">
+            <span class="mood-emoji">😄</span>
+            <span class="mood-name">開心</span>
+            <span class="mood-tagline">想吃點特別的！</span>
+          </button>
+
+          <button class="mood-btn" data-mood="sad">
+            <span class="mood-emoji">🥺</span>
+            <span class="mood-name">難過</span>
+            <span class="mood-tagline">需要療癒系美食</span>
+          </button>
+
+          <button class="mood-btn" data-mood="tired">
+            <span class="mood-emoji">🥱</span>
+            <span class="mood-name">疲倦</span>
+            <span class="mood-tagline">想補充能量</span>
+          </button>
+
+          <button class="mood-btn" data-mood="stressed">
+            <span class="mood-emoji">😫</span>
+            <span class="mood-name">壓力大</span>
+            <span class="mood-tagline">想吃點舒壓的</span>
+          </button>
+
+          <button class="mood-btn" data-mood="bored">
+            <span class="mood-emoji">🙃</span>
+            <span class="mood-name">無聊</span>
+            <span class="mood-tagline">想嘗試新口味</span>
+          </button>
+
+          <button class="mood-btn" data-mood="blessed">
+            <span class="mood-emoji">🥰</span>
+            <span class="mood-name">幸福</span>
+            <span class="mood-tagline">想吃甜甜的食物</span>
+          </button>
+        </div>
+
+        <!-- 當前心情引導資訊列 -->
+        <div class="mood-info-bar">
+          <div id="mood-header-info">
+            <!-- 由 js 動態填入心情文案 -->
+          </div>
+          <button class="btn btn-outline btn-sm" id="refresh-mood-recommendation">
+            🔄 再換一批推薦
+          </button>
+        </div>
+
+        <!-- 心情美食卡片展示網格 (3 ~ 6 個卡片，附推薦理由) -->
+        <div class="food-grid" id="mood-food-grid">
+          <!-- 由 js/app.js 動態生成 -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         功能 3：美食探索與預算篩選專區 (Explore & Budget)
+    ══════════════════════════════════════════ -->
+    <section id="explore-section" class="page-section">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <div class="section-tag-pill">💰 FEATURE 03 · 預算與分類探索</div>
+          <h2 class="section-main-title">靈活預算與餐點篩選</h2>
+          <p class="section-sub-title">依照皮夾厚度與想吃的餐點類型，自由搭配篩選，找出最符合期待的美食！</p>
+        </div>
+
+        <!-- 篩選卡片容器 -->
+        <div class="filter-card-wrapper">
+          
+          <!-- 1. 預算區間篩選 Pills -->
+          <div class="filter-row">
+            <span class="filter-label">💰 預算區間：</span>
+            <div class="pills-group" id="budget-pills-group">
+              <button class="pill-btn active budget-pill" data-budget="all">不限預算</button>
+              <button class="pill-btn budget-pill" data-budget="tier1">100 元以下</button>
+              <button class="pill-btn budget-pill" data-budget="tier2">101～200 元</button>
+              <button class="pill-btn budget-pill" data-budget="tier3">201～300 元</button>
+              <button class="pill-btn budget-pill" data-budget="tier4">301 元以上</button>
+            </div>
+          </div>
+
+          <!-- 2. 餐點類型篩選 Pills -->
+          <div class="filter-row">
+            <span class="filter-label">🍱 餐點類型：</span>
+            <div class="pills-group" id="meal-type-pills-group">
+              <button class="pill-btn active meal-type-pill" data-meal-type="全部類型">全部類型</button>
+              <button class="pill-btn meal-type-pill" data-meal-type="飯類">飯類</button>
+              <button class="pill-btn meal-type-pill" data-meal-type="麵類">麵類</button>
+              <button class="pill-btn meal-type-pill" data-meal-type="炸物">炸物</button>
+              <button class="pill-btn meal-type-pill" data-meal-type="串燒鍋物">串燒鍋物</button>
+              <button class="pill-btn meal-type-pill" data-meal-type="蛋餅輕食">蛋餅輕食</button>
+              <button class="pill-btn meal-type-pill" data-meal-type="甜點">甜點</button>
+              <button class="pill-btn meal-type-pill" data-meal-type="飲料">飲料</button>
+            </div>
+          </div>
+
+          <!-- 3. 料理風格與即時搜尋與排序 -->
+          <div class="search-and-sort-row">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="filter-label">📍 商圈：</span>
+              <select id="explore-category-filter" class="custom-select" style="width: auto; padding: 8px 30px 8px 14px;">
+                <option value="全部料理">全部商圈料理</option>
+                <option value="一中商圈美食">一中商圈美食</option>
+                <option value="逢甲夜市美食">逢甲夜市美食</option>
+                <option value="異國人氣名店">異國人氣名店</option>
+                <option value="甜蜜甜品冰品">甜蜜甜品冰品</option>
+                <option value="排隊特調手搖">排隊特調手搖</option>
+              </select>
+            </div>
+
+            <!-- 關鍵字搜尋框 -->
+            <div class="search-box-wrap">
+              <span class="search-icon">🔍</span>
+              <input 
+                type="text" 
+                id="explore-search-input" 
+                class="search-input" 
+                placeholder="搜尋美食名稱、食材或介紹（例如：拉麵、草莓、起司）..." 
+              />
+            </div>
+
+            <!-- 排序方式 -->
+            <div class="sort-select-wrap">
+              <label for="explore-sort-select">排序：</label>
+              <select id="explore-sort-select">
+                <option value="default">預設推薦</option>
+                <option value="price-asc">價格：由低到高 ↗</option>
+                <option value="price-desc">價格：由高到低 ↘</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 篩選結果狀態與計數 -->
+        <div class="explore-result-status">
+          <span id="explore-result-count">共找到 48 種美味料理 ♡</span>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">點擊任一卡片可檢視詳細介紹與推薦理由</span>
+        </div>
+
+        <!-- 篩選後美食卡片網格 -->
+        <div class="food-grid" id="explore-food-grid">
+          <!-- 由 js/app.js 動態渲染 -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         功能 4：我的美食收藏專區 (Favorites)
+    ══════════════════════════════════════════ -->
+    <section id="favorites-section" class="page-section">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <div class="section-tag-pill">❤️ FEATURE 04 · 我的美食口袋名單</div>
+          <h2 class="section-main-title">我的美食收藏清單</h2>
+          <p class="section-sub-title">把讓你心動的料理全部珍藏在這裡，不再擔心想吃的時候找不到 ♡</p>
+        </div>
+
+        <!-- 收藏控制列 -->
+        <div class="favorites-header-bar">
+          <div class="fav-count-indicator">
+            <span>❤️</span>
+            <span id="favorites-total-count">共收藏 0 款美食</span>
+          </div>
+
+          <div class="fav-filter-actions">
+            <select id="favorites-category-filter" class="custom-select" style="width: auto; padding: 6px 30px 6px 12px; font-size: 0.88rem;">
+              <option value="all">所有商圈分類</option>
+              <option value="一中商圈美食">一中商圈美食</option>
+              <option value="逢甲夜市美食">逢甲夜市美食</option>
+              <option value="異國人氣名店">異國人氣名店</option>
+              <option value="甜蜜甜品冰品">甜蜜甜品冰品</option>
+              <option value="排隊特調手搖">排隊特調手搖</option>
+            </select>
+            <button class="btn btn-outline btn-sm" id="clear-favorites-btn">
+              🗑️ 清空所有收藏
+            </button>
+          </div>
+        </div>
+
+        <!-- 收藏卡片展示網格 -->
+        <div class="food-grid" id="favorites-food-grid">
+          <!-- 由 js/app.js 動態渲染，無收藏時展示可愛空狀態畫面 -->
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       彈出視窗：轉盤命定結果彈窗 (Result Modal)
+  ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="result-modal" role="dialog" aria-modal="true">
+    <div class="modal-window">
+      <button class="modal-close-btn" aria-label="關閉彈窗">✕</button>
+      <div class="modal-body-content">
+        <!-- 由 js 動態填入中獎項目內容 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       彈出視窗：美食詳細資訊彈窗 (Detail Modal)
+  ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="detail-modal" role="dialog" aria-modal="true">
+    <div class="modal-window">
+      <button class="modal-close-btn" aria-label="關閉詳細資訊">✕</button>
+      <div class="modal-body-content">
+        <!-- 由 js 動態填入卡片詳細內容 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 回到頂端浮動按鈕 -->
+  <button class="scroll-top-btn" id="scroll-top-btn" aria-label="回到頂端" title="回到頂端">
+    ↑
+  </button>
+
+  <!-- 頁尾 (Footer) -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h4>🍓 Yummy Day — 今天吃什麼？</h4>
+          <p>一中街夜市 × 逢甲夜市在地人氣美食指南。<br />每天最困難的美食選擇，就用魔法幫你決定 ♡</p>
+        </div>
+        <div class="footer-info-tags">
+          <span class="course-badge">🎓 大學「程式設計與應用」課程期末專案</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">技術架構：原生 HTML5 · 模組化 CSS3 · 原生 JavaScript (ES6+) · Web Audio API</span>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <p>© 2026 Yummy Day. All rights reserved. Crafted with 💖 and 🍓.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 引用 JavaScript 檔案 (依相依性載入) -->
+  <script src="js/data.js"></script>
+  <script src="js/wheel.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
